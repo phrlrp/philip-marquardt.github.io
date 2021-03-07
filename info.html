@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Philip Marquardt">
+    <meta name="date" content="16.01.2021">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="info.css" rel="stylesheet">
+    <title>Informationswebsite über Covid-19</title>
+</head>
+<body>
+    <main>
+        <div class="heading">
+            <h1>Covid-19</h1>
+        </div>
+        <div class="text">
+            <p>COVID-19 ist eine meldepflichtige Infektionskrankheit, zu der es infolge einer Infektion 
+                mit dem neuartigen Coronavirus SARS-CoV-2 kommen kann. Dieses Virus wird primär über 
+                die Atemwege eingetragen und ist dann dort nachweisbar. Es wurde erstmals im Dezember 2019 
+                in Wuhan nachgewisesen. Die COVID-19-Pandemie breitete sich im Januar und Februar 2020 zunächst
+                in China epidemieartig aus und wurde dort im Februar mit radikalen Quarantänemaßnahmen gestoppt. 
+                Bereits davor hatte sich das Virus in viele Länder  verbreitet; die Epidemie wurde zu einer 
+                weltweiten Pandemie mit derzeit (Stand 1. Januar 2021) mehr als 82 Millionen infizierten Personen.
+                Die Zahl der Todesopfer im Zusammenhang mit dem Virus beläuft sich auf mehr als 1,8 Millionen.
+            </p>
+        </div>
+        <div class="covid">
+            <img class="bild1" src="virus.png">
+        </div>
+        <div class="aha">
+            <a href="https://apps.apple.com/de/app/corona-warn-app/id1512595757">
+                <img class="bild2" src="aha3.png">
+            </a>
+        </div>
+        <div class="video">
+            <iframe width="30%" height="30%" src="https://www.youtube.com/embed/_kU4oCmRFTw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+            picture-in-picture" allowfullscreen>
+            </iframe>
+        </div>
+        <div class="zurrückmeldung">
+            <a id="logo" href="rückmeldung.html">Gib mir doch gern eine Rückmeldung!</a>            
+        </div>
+        <div class="liveticker">
+            <h2 class="text-center mt-5">Liveticker</h2>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Total Cases</th>
+                    <th>Total Deaths</th>
+                    <th>Total Recovered</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="data">
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>   
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script>
+ $(document).ready(function(){
+     init()
+	 function init(){
+	     var url = "https://coronavirus-tracker-api.herokuapp.com/v2/locations"
+		 var data = ''		 
+		 $.get(url,function(data){
+		     console.log(data.latest)
+			 data = `			 
+			 <td>${data.latest.confirmed}</td>
+			 <td>${data.latest.deaths}</td>
+			 <td>${data.latest.recovered}</td>			 
+			 `
+			 $("#data").html(data)
+		 })
+	 }
+ })
+ </script>
+</html>
